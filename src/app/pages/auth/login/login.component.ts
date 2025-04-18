@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../../core/services/auth.service';
-import { LoginRequest } from '../../../core/models/login-request.model';
+import { LoginRequest } from '../../../core/models/auth/login-request.model';
 import { response } from 'express';
 import { Router } from '@angular/router';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -44,11 +44,14 @@ export class LoginComponent {
         ? { email: usernameOrEmail, password }
         : { username: usernameOrEmail, password };
     
-      console.log('Payload enviado:', data);
-    
       this.authService.login(data).subscribe({
         next: (response) => {
           console.log('Login exitoso:', response);
+          
+          localStorage.setItem('accessToken', response.accessToken);
+          localStorage.setItem('refreshToken', response.refreshToken);
+          localStorage.setItem('user', JSON.stringify(response.user));
+
           // Redirigir al usuario a la página principal
           // this.router.navigate(['/home']);
         },
