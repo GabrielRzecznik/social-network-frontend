@@ -7,6 +7,8 @@ import { Router } from '@angular/router';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +16,9 @@ import { MatButtonModule } from '@angular/material/button';
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    MatIconModule,
+    MatSnackBarModule
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
@@ -26,7 +30,8 @@ export class LoginComponent {
   constructor(
     //private router: Router,
     private fb: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -46,18 +51,19 @@ export class LoginComponent {
     
       this.authService.login(data).subscribe({
         next: (response) => {
-          console.log('Login exitoso:', response);
-          
-          localStorage.setItem('accessToken', response.accessToken);
-          localStorage.setItem('refreshToken', response.refreshToken);
-          localStorage.setItem('user', JSON.stringify(response.user));
-
           // Redirigir al usuario a la página principal
           // this.router.navigate(['/home']);
         },
         error: (err) => {
-          console.error('Error de login:', err);
-          // Mostrar un mensaje de error al usuario (ej: "Credenciales inválidas")
+          const errorMessage = err?.error?.message || 'Ocurrió un error inesperado';
+          console.error('Mensaje de error:', errorMessage);
+
+          this.snackBar.open(errorMessage, 'Cerrar', {
+            duration: 20000,
+            horizontalPosition: 'center',
+            verticalPosition: 'top',
+            panelClass: ['snackbar-error']
+          });
         }
       });
     }
