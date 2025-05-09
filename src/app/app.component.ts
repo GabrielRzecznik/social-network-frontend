@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { AuthSessionService } from './core/services/auth-session.service';
 
 @Component({
   selector: 'app-root',
@@ -11,4 +12,8 @@ import { RouterOutlet } from '@angular/router';
 })
 export class AppComponent {
   title = 'social-network-frontend';
+
+  constructor(private sessioService: AuthSessionService) {
+    this.sessioService.initializeSession();
+  }
 }

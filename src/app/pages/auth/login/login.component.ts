@@ -1,14 +1,13 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { AuthService } from '../../../core/services/auth.service';
 import { LoginRequest } from '../../../core/models/auth/login-request.model';
-import { response } from 'express';
 import { Router } from '@angular/router';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { AuthLoginService } from '../../../core/services/auth-login.service';
 
 @Component({
   selector: 'app-login',
@@ -28,9 +27,9 @@ export class LoginComponent {
   loginForm!: FormGroup;
 
   constructor(
-    //private router: Router,
+    private router: Router,
     private fb: FormBuilder,
-    private authService: AuthService,
+    private authLoginService: AuthLoginService,
     private snackBar: MatSnackBar
   ) {}
 
@@ -49,10 +48,9 @@ export class LoginComponent {
         ? { email: usernameOrEmail, password }
         : { username: usernameOrEmail, password };
     
-      this.authService.login(data).subscribe({
-        next: (response) => {
-          // Redirigir al usuario a la página principal
-          // this.router.navigate(['/home']);
+      this.authLoginService.login(data).subscribe({
+        next: () => {
+          this.router.navigate(['/home']);
         },
         error: (err) => {
           const errorMessage = err?.error?.message || 'Ocurrió un error inesperado';
