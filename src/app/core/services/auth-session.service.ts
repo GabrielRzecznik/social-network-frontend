@@ -6,7 +6,7 @@ import { AuthResponse } from '../models/auth/auth-response.model';
   providedIn: 'root',
 })
 export class AuthSessionService {
-  private currentUserSubject = new BehaviorSubject<AuthResponse | null>(null);
+  private currentUserSubject = new BehaviorSubject<AuthResponse | null | undefined>(undefined);
   public currentUser$ = this.currentUserSubject.asObservable();
 
   saveSession(response: AuthResponse): void {
@@ -21,7 +21,7 @@ export class AuthSessionService {
     this.currentUserSubject.next(null);
   }
 
-  getCurrentUser(): AuthResponse | null {
+  getCurrentUser(): AuthResponse | null | undefined {
     return this.currentUserSubject.value;
   }
 

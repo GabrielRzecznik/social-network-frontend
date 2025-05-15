@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-import { LoginComponent } from './pages/auth/login/login.component';
 import { HomeComponent } from './pages/home/home.component';
 import { authGuard } from './core/guards/auth.guard';
 
@@ -11,11 +10,11 @@ export const routes: Routes = [
     },
     {
         path: 'login',
-        component: LoginComponent
+        loadComponent: () => import('./pages/auth/login/login.component').then(m => m.LoginComponent)
     },
     {
+        canMatch: [authGuard],
         path: 'home',
-        component: HomeComponent,
-        canActivate: [authGuard]
+        loadComponent: () => import('./pages/home/home.component').then(m => m.HomeComponent),
     }
 ];

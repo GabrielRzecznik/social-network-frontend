@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, OnInit, PLATFORM_ID, signal } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { LoginRequest } from '../../../core/models/auth/login-request.model';
 import { Router } from '@angular/router';
@@ -8,6 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { AuthLoginService } from '../../../core/services/auth-login.service';
+import { isPlatformServer } from '@angular/common';
 
 @Component({
   selector: 'app-login',
@@ -23,15 +24,20 @@ import { AuthLoginService } from '../../../core/services/auth-login.service';
   styleUrl: './login.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
+  isUser = signal(false)
+  public isServer: boolean;
 
   constructor(
     private router: Router,
     private fb: FormBuilder,
     private authLoginService: AuthLoginService,
-    private snackBar: MatSnackBar
-  ) {}
+    private snackBar: MatSnackBar,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {
+    this.isServer = isPlatformServer(platformId);
+  }
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
