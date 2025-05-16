@@ -56,19 +56,20 @@
   }
   
   .navbar-right {
-    .nav-button {
-      color: white;
-      display: flex;
-    }
-    
     justify-content: flex-end;
     flex: 1 1 33%;
+    
+    .nav-button {
+      color: white;
+      margin-right: 10px;
+    }
 
     .responsive-hide {
       display: none;
     }
 
     .avatar-button {
+      margin-left: 25px;
       padding: 0;
       min-width: auto;
     }
