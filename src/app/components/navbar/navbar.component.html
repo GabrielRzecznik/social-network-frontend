@@ -1,0 +1,57 @@
+<nav class="navbar">
+  <!-- Izquierda: Título y Buscador -->
+  <div class="navbar-left">
+    <span class="navbar-title">SocialNetworkFrontend</span>
+  </div>
+
+  <!-- Centro: Navegación -->
+  <div class="navbar-center">
+     <div fxLayout="row">
+       <mat-form-field appearance="outline" class="search-field">
+         <mat-label>Buscar</mat-label>
+         <input matInput type="text" placeholder="Buscar..." />
+         <button mat-icon-button matSuffix aria-label="Buscar">
+           <mat-icon>search</mat-icon>
+         </button>
+       </mat-form-field>
+     </div>
+  </div>
+
+  <!-- Derecha: Avatar y menú -->
+  <div class="navbar-right">
+    <button mat-button class="nav-button">
+      <mat-icon>home</mat-icon>
+      <span class="responsive-hide">Home</span>
+    </button>
+    <button mat-button class="nav-button">
+      <mat-icon>chat</mat-icon>
+      <span class="responsive-hide">Chat</span>
+    </button>
+    <button mat-button class="nav-button">
+      <mat-icon>notifications</mat-icon>
+      <span class="responsive-hide">Notificaciones</span>
+    </button>
+
+    <button mat-button [matMenuTriggerFor]="menu" class="avatar-button" aria-label="Menú de usuario">
+      <div class="user-avatar">
+        <img [src]="userAvatarUrl || 'assets/avatar-placeholder.png'" alt="Avatar usuario" />
+      </div>
+    </button>
+
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>
+        <mat-icon>person</mat-icon>
+        <span>Perfil</span>
+      </button>
+      <button mat-menu-item>
+        <mat-icon>settings</mat-icon>
+        <span>Configuración</span>
+      </button>
+      <mat-divider></mat-divider>
+      <button mat-menu-item>
+        <mat-icon>logout</mat-icon>
+        <span>Cerrar Sesión</span>
+      </button>
+    </mat-menu>
+  </div>
+</nav>

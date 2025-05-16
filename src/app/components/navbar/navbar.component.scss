@@ -1,0 +1,123 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #222;
+  color: white;
+  padding: 0.5rem 1rem;
+  flex-wrap: nowrap;
+
+  .navbar-left,
+  .navbar-center,
+  .navbar-right {
+    display: flex;
+    align-items: center;
+  }
+
+  .navbar-left {
+    flex: 1 1 33%;
+
+    .navbar-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+  }
+
+  .navbar-center {
+    justify-content: center;
+    gap: 1rem;
+    flex: 1 1 33%;
+
+    .search-field {
+      flex: 1;
+      max-width: 350px;
+      height: 40px;
+    }
+
+    ::ng-deep .mat-mdc-text-field-wrapper {
+      height: 40px;
+      display: flex;
+      align-items: center;
+    }
+
+    ::ng-deep .mat-mdc-form-field .mdc-floating-label {
+      top: 50%;
+      transition: all 0.2s ease;
+    }
+
+    ::ng-deep .mat-mdc-form-field.mat-focused .mdc-floating-label,
+    ::ng-deep .mat-mdc-form-field.mat-mdc-form-field-should-float .mdc-floating-label {
+      top: -10px;
+      font-size: 10px;
+      transform: none;
+      padding-right: 10px;
+    }
+
+  }
+  
+  .navbar-right {
+    .nav-button {
+      color: white;
+      display: flex;
+    }
+    
+    justify-content: flex-end;
+    flex: 1 1 33%;
+
+    .responsive-hide {
+      display: none;
+    }
+
+    .avatar-button {
+      padding: 0;
+      min-width: auto;
+    }
+
+    .user-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 2px solid none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+    }
+  }
+
+  @media (max-width: 800px) {
+    flex-wrap: wrap;
+
+    .navbar-left,
+    .navbar-center,
+    .navbar-right {
+      flex: 1 1 100%;
+      justify-content: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .navbar-left {
+      flex-direction: column;
+      align-items: stretch;
+
+      .search-field {
+        width: 100%;
+        max-width: none;
+      }
+    }
+
+    .navbar-right {
+      .responsive-hide {
+        display: block;
+      }
+    }
+  }
+}
+
