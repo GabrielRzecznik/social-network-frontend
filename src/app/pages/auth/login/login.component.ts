@@ -25,8 +25,7 @@ import { isPlatformServer } from '@angular/common';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoginComponent implements OnInit {
-  loginForm!: FormGroup;
-  isUser = signal(false)
+  public loginForm!: FormGroup;
   public isServer: boolean;
 
   constructor(
