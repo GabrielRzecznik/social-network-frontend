@@ -25,7 +25,7 @@ import { filter, Subscription } from 'rxjs';
 })
 export class NavbarComponent {
   public userAvatarUrl = 'https://jornada.us-sea-1.linodeobjects.com/imagenes/2024/6/24/372280_1_102812_raw.jpg';
-  public showNavbar = true;
+  public showNavbar = false;
   private routerSub!: Subscription;
 
   constructor(
