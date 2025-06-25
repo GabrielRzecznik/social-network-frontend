@@ -18,5 +18,10 @@ export const routes: Routes = [
         canMatch: [authGuard],
         path: 'home',
         loadComponent: () => import('./pages/home/home.component').then(m => m.HomeComponent),
+    },
+    {
+        canMatch: [authGuard],
+        path: 'profile',
+        loadComponent: () => import('./pages/profile/profile.component').then(m => m.ProfileComponent),
     }
 ];
