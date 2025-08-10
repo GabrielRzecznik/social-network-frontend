@@ -1,12 +1,31 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Post } from '../../core/models/post/post.model';
+import { PostService } from '../../core/services/post.service';
+
 
 @Component({
   selector: 'app-profile',
-  imports: [],
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './profile.component.html',
-  styleUrl: './profile.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./profile.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ProfileComponent {
+export class ProfileComponent implements OnInit {
+  private postService = inject(PostService);
+  posts: Post[] = [];
 
+  ngOnInit() {
+    const username = JSON.parse(localStorage.getItem('user')!).username;
+
+    this.postService.getPostsByUser(username).subscribe({
+      next: (posts) => {
+        this.posts = posts;
+        console.log('Posts:', posts);
+      },
+      error: (err) => console.error('Error:', err),
+    });
+  }
 }
+
