@@ -7,20 +7,40 @@ export class FullDateTime implements PipeTransform {
   transform(value: string | Date): string {
     if (!value) return '';
 
-    const date = new Date(value);
-    if (isNaN(date.getTime())) return '';
+    const dateValue = new Date(value);
+    if (isNaN(dateValue.getTime())) return '';
 
-    const diasSemana = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
-    const meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+    const now = new Date();
+    const diffMs = now.getTime() - dateValue.getTime();
+    const diffHours = diffMs / (1000 * 60 * 60);
 
-    const diaSemana = diasSemana[date.getDay()];
-    const dia = date.getDate();
-    const mes = meses[date.getMonth()];
-    const anio = date.getFullYear();
+    // - 24 hours → show "X hours/minutes ago"
+    if (diffHours < 24) {
+      if (diffHours < 1) {
+        const diffMinutes = diffMs / (1000 * 60);
+        if (diffMinutes < 1) {
+          const secondsAgo = Math.floor(diffMs / 1000);
+          return `Hace ${secondsAgo} segundo${secondsAgo !== 1 ? 's' : ''}`;
+        } else {
+          const minutesAgo = Math.floor(diffMinutes);
+          return `Hace ${minutesAgo} minuto${minutesAgo !== 1 ? 's' : ''}`;
+        }
+      } else {
+        const hoursAgo = Math.floor(diffHours);
+        return `Hace ${hoursAgo} hora${hoursAgo !== 1 ? 's' : ''}`;
+      }
+    }
 
-    const horas = date.getHours().toString().padStart(2, '0');
-    const minutos = date.getMinutes().toString().padStart(2, '0');
+    // + 24 hours → show "3 de agosto del 2025"
+    const months = [
+      'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+      'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+    ];
 
-    return `${diaSemana} ${dia} de ${mes} del ${anio} a las ${horas}:${minutos}`;
+    const day = dateValue.getDate();
+    const month = months[dateValue.getMonth()];
+    const year = dateValue.getFullYear();
+
+    return `${day} de ${month} del ${year}`;
   }
 }
