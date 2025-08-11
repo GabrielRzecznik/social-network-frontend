@@ -41,6 +41,6 @@ export class FullDateTime implements PipeTransform {
     const month = months[dateValue.getMonth()];
     const year = dateValue.getFullYear();
 
-    return `${day} de ${month} del ${year}`;
+    return `${day} de ${month} de ${year}`;
   }
 }
