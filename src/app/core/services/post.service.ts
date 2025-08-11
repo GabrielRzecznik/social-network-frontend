@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AuthSessionService } from './auth-session.service';
 import { Post } from '../models/post/post.model';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -39,6 +40,10 @@ export class PostService {
   }
 
   getPostsByUser(username: string): Observable<Post[]> {
-    return this.http.get<Post[]>(`${this.url}post/${username}`, { headers: this.getAuthHeaders() });
+    return this.http
+      .get<{ message: string; posts: Post[] }>(`${this.url}post/${username}`, { headers: this.getAuthHeaders() })
+      .pipe(
+        map(response => response.posts)
+      );
   }
 }
