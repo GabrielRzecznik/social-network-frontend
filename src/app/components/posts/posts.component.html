@@ -1,20 +1,20 @@
 <div class="container">
-  <div class="text-end mb-3">
+  <div class="text-end mb-3 publicationSize">
     <div class="btn-group" role="group" aria-label="First group">
       <span class="btn btn-sm btn-dark" style="pointer-events: none;">
-        Tamaño de publicaciones
+        Tamaño de publicaciones 
       </span>
-      <button type="button" class="btn btn-sm btn-outline-dark">
+      <button type="button" class="btn btn-sm btn-outline-dark" (click)="decreaseSize()">
         <i class="bi bi-plus-lg"></i>
       </button>
-      <button type="button" class="btn btn-sm btn-outline-dark">
+      <button type="button" class="btn btn-sm btn-outline-dark" (click)="increaseSize()">
         <i class="bi bi-dash-lg"></i>
       </button>
     </div>
   </div>
     <div class="row">
       @for (post of posts; track post.id_post) {
-        <div class="col-md-3 mb-3">
+        <div class="mb-3" [ngClass]="'col-md-' + colSize">
           <div class="card h-100">
             <div class="card-body">
               <p class="card-text">{{ post.content }}</p>

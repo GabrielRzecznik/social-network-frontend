@@ -1,9 +1,28 @@
 <div class="container">
-    <b>{{ name }} {{ surname }}</b>
-    <br>
-    <span>{{ username }}</span>
-    <br>
-    <span>Fecha de nacimiento: {{ birthdate }}</span>    
+    <div class="user-avatar">
+        <img [src]="userAvatarUrl || 'assets/avatar-placeholder.png'" alt="Avatar usuario" />
+    </div>
+    <div class="user-info">
+        <b class="fullName">{{ name }} {{ surname }}</b>
+        <span class="userName">{{ username }}</span>
+        <div class="row text-center pss">
+            <div class="col-4">
+                <b>32</b>
+                <br>
+                publicaciones
+            </div>
+            <div class="col-4">
+                <b>18</b>
+                <br>
+                seguidores
+            </div>
+            <div class="col-4">
+                <b>321</b>
+                <br>
+                seguidos
+            </div>
+        </div>
+    </div>
 </div>
 
 <app-posts></app-posts>

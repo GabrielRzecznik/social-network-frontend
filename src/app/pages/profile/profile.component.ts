@@ -11,10 +11,11 @@ import { PostsComponent } from "../../components/posts/posts.component";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProfileComponent implements OnInit {
-  name: string | null = null;
-  surname: string | null = null;
-  username: string | null = null;
-  birthdate: string | null = null;
+  public name: string | null = null;
+  public surname: string | null = null;
+  public username: string | null = null;
+  public birthdate: string | null = null;
+  public userAvatarUrl = 'https://jornada.us-sea-1.linodeobjects.com/imagenes/2024/6/24/372280_1_102812_raw.jpg';
 
   ngOnInit(): void {
     this.name = JSON.parse(localStorage.getItem('user')!).name;

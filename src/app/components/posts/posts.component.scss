@@ -1,3 +1,9 @@
 .buttons-right{
     text-align: right;
 }
+
+@media (max-width: 800px) {
+    .publicationSize {
+        margin-top: 10px;
+    }
+}
