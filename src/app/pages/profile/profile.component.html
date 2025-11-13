@@ -1,9 +1,19 @@
 <div class="container">
-    <div class="user-avatar">
-        <img [src]="userAvatarUrl || 'assets/avatar-placeholder.png'" alt="Avatar usuario" />
+    <div class="avatar-wrapper">
+        <div class="user-avatar">
+            <img [src]="userAvatarUrl || 'assets/avatar-placeholder.png'" alt="Avatar usuario" />
+        </div>
+        <span class="edit-overlay btn btn-warning">
+            <i class="bi bi-pencil"></i>
+        </span>
     </div>
     <div class="user-info">
-        <b class="fullName">{{ name }} {{ surname }}</b>
+        <div class="user-header">
+            <b class="fullName">{{ name }} {{ surname }}</b>
+            <button type="button" class="btn btn-sm btn-warning btn-user-edit">
+                <i class="bi bi-person-fill-gear"></i> Editar usuario
+            </button>
+        </div>
         <span class="userName">{{ username }}</span>
         <div class="row text-center pss">
             <div class="col-4">
