@@ -62,7 +62,7 @@ export class LoginComponent implements OnInit {
           console.error('Mensaje de error:', errorMessage);
 
           this.snackBar.open(errorMessage, 'Cerrar', {
-            duration: 20000,
+            duration: 2500,
             horizontalPosition: 'center',
             verticalPosition: 'top',
             panelClass: ['snackbar-error']

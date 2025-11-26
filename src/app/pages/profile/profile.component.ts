@@ -10,6 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { EditUserFormComponent } from '../../components/forms/edit-user-form/edit-user-form.component';
 import { User } from '../../core/models/user/user.model';
 import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-profile',
@@ -17,7 +18,7 @@ import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'es-AR' }
   ],
-  imports: [CommonModule, ReactiveFormsModule, PostsComponent, MatDialogModule, MatButtonModule, MatNativeDateModule],
+  imports: [CommonModule, ReactiveFormsModule, PostsComponent, MatDialogModule, MatButtonModule, MatNativeDateModule, MatSnackBarModule],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -34,7 +35,8 @@ export class ProfileComponent implements OnInit {
     private userService: UserService,
     private fb: FormBuilder,
     private cd: ChangeDetectorRef, 
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar,
   ) {}
 
   ngOnInit(): void {
@@ -61,6 +63,7 @@ export class ProfileComponent implements OnInit {
   }
 
   openEditUserDialog() {
+    this.setProfileData();
     const dialogRef = this.dialog.open(EditUserFormComponent, {
       //width: '400px',
       data: { userForm: this.userForm } // pasar el form al hijo
@@ -75,8 +78,13 @@ export class ProfileComponent implements OnInit {
 
   onSubmit() {
     if (this.userForm.invalid) {
-        console.warn('❌ Formulario inválido. No se puede enviar.');
-        return;
+      this.snackBar.open("❌ Formulario inválido. No se puede enviar.", 'Cerrar', {
+        duration: 2500,
+        horizontalPosition: 'center',
+        verticalPosition: 'top',
+        panelClass: ['snackbar-error']
+      });
+      return;
     }
 
     // 1. Obtener los valores del formulario
@@ -100,13 +108,15 @@ export class ProfileComponent implements OnInit {
         birthdate: birthdateValue
     };
 
-    console.log('📅 VALOR DE FECHA ANTES DE PROCESAR:', formValues.birthdate);
-    console.log('📅 TIPO DE DATO DE FECHA:', typeof formValues.birthdate);
-
     // 4. Llamar al servicio y manejar la respuesta
     this.userService.updateProfile(payload).subscribe({
       next: (res: any) => {
-        console.log('📌 RESPUESTA BACKEND (EXITOSA):', res);
+        this.snackBar.open(res.message, 'Cerrar', {
+            duration: 2500,
+            horizontalPosition: 'center',
+            verticalPosition: 'top',
+            panelClass: ['snackbar-error']
+          });
         
         // 5. Actualizar localStorage con los nuevos datos
         const oldUser = JSON.parse(localStorage.getItem('user')!);
@@ -118,8 +128,14 @@ export class ProfileComponent implements OnInit {
         
       },
       error: (err) => {
-        // 7. Manejo de errores
-        console.error('❌ ERROR AL ACTUALIZAR:', err.error?.message || err);
+        const errorMessage = err?.error?.message || 'Ocurrió un error inesperado';
+
+        this.snackBar.open(errorMessage, 'Cerrar', {
+          duration: 2500,
+          horizontalPosition: 'center',
+          verticalPosition: 'top',
+          panelClass: ['snackbar-error']
+        });
       },
     });
 }
