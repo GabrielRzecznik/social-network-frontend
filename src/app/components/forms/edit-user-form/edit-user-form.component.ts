@@ -9,7 +9,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 
-// 👉 FORMATO CORRECTO
 export const MY_DATE_FORMATS = {
   parse: {
     dateInput: 'DD/MM/YYYY',
@@ -54,9 +53,7 @@ export class EditUserFormComponent {
   }
 
   submit() {
-    if (this.data.userForm.invalid) return; // 👈 muy importante
-
-    // 👇 En vez de cerrar, emitís el form
+    if (this.data.userForm.invalid) return;
     this.submitEvent.emit(this.data.userForm.value);
   }
 }
