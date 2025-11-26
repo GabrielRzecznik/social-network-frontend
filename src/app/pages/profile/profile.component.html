@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="userProfile$ | async as user">
     <div class="avatar-wrapper">
         <div class="user-avatar">
             <img [src]="userAvatarUrl || 'assets/avatar-placeholder.png'" alt="Avatar usuario" />
@@ -7,64 +7,29 @@
             <i class="bi bi-pencil"></i>
         </span>
     </div>
+
     <div class="user-info">
         <div class="user-header">
-            <b class="fullName">{{ name }} {{ surname }}</b>
-            <button type="button" class="btn btn-sm btn-warning btn-user-edit" data-bs-toggle="modal" data-bs-target="#editUserModal" (click)="initializeEditUserForm()">
+            <b class="fullName">{{ user.name }} {{ user.surname }}</b>
+
+            <button 
+                mat-raised-button
+                color="accent"
+                class="btn-user-edit"
+                (click)="openEditUserDialog()">
                 <i class="bi bi-person-fill-gear"></i> Editar perfil
             </button>
-            <div class="modal fade" id="editUserModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Editar perfil</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-6">
-                            <div class="mb-3">
-                                <input type="name" class="form-control" id="nameInput" placeholder="Nombre" [(ngModel)]="formName">
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="mb-3">
-                                <input type="surname" class="form-control" id="surnameInput" placeholder="Apellido" [(ngModel)]="formSurname">
-                            </div>
-                        </div>
-                    </div>
-                    <input type="username" class="form-control mb-3" id="usernameInput" placeholder="Nombre de usuario" [(ngModel)]="formUsername">
-                    <input type="date" class="form-control" id="birthdateInput" [(ngModel)]="formBirthdate">
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-primary">Guardar cambios</button>
-                </div>
-                </div>
-            </div>
-            </div>
+
         </div>
-        <span class="userName">{{ username }}</span>
+
+        <span class="userName">{{ user.username }}</span>
+
         <div class="row text-center pss">
-            <div class="col-4">
-                <b>32</b>
-                <br>
-                publicaciones
-            </div>
-            <div class="col-4">
-                <b>18</b>
-                <br>
-                seguidores
-            </div>
-            <div class="col-4">
-                <b>321</b>
-                <br>
-                seguidos
-            </div>
+            <div class="col-4"><b>32</b><br>publicaciones</div>
+            <div class="col-4"><b>18</b><br>seguidores</div>
+            <div class="col-4"><b>321</b><br>seguidos</div>
         </div>
     </div>
 </div>
-
-<app-edit-profile></app-edit-profile>
 
 <app-posts></app-posts>
