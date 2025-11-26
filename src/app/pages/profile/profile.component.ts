@@ -64,19 +64,17 @@ export class ProfileComponent implements OnInit {
 
   openEditUserDialog() {
     this.setProfileData();
+
     const dialogRef = this.dialog.open(EditUserFormComponent, {
-      //width: '400px',
-      data: { userForm: this.userForm } // pasar el form al hijo
+      data: { userForm: this.userForm }
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result === 'submit') {
-        this.onSubmit();  // guardar desde el padre
-      }
+    dialogRef.componentInstance.submitEvent.subscribe(() => {
+      this.onSubmit(dialogRef);
     });
   }
 
-  onSubmit() {
+  onSubmit(dialogRef?: any) {
     if (this.userForm.invalid) {
       this.snackBar.open("❌ Formulario inválido. No se puede enviar.", 'Cerrar', {
         duration: 2500,
@@ -125,7 +123,7 @@ export class ProfileComponent implements OnInit {
 
         // 6. Actualizar el estado reactivo del componente
         this.setProfileData();
-        
+        dialogRef?.close();
       },
       error: (err) => {
         const errorMessage = err?.error?.message || 'Ocurrió un error inesperado';

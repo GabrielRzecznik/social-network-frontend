@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, Output, EventEmitter } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -42,6 +42,8 @@ export const MY_DATE_FORMATS = {
 })
 export class EditUserFormComponent {
 
+  @Output() submitEvent = new EventEmitter<any>();
+
   constructor(
     public dialogRef: MatDialogRef<EditUserFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { userForm: FormGroup }
@@ -52,6 +54,9 @@ export class EditUserFormComponent {
   }
 
   submit() {
-    this.dialogRef.close('submit');
+    if (this.data.userForm.invalid) return; // 👈 muy importante
+
+    // 👇 En vez de cerrar, emitís el form
+    this.submitEvent.emit(this.data.userForm.value);
   }
 }
