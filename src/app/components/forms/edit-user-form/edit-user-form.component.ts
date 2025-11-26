@@ -4,10 +4,15 @@ import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MAT_DATE_FORMATS } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+
+import { 
+  MAT_DATE_LOCALE, 
+  MAT_DATE_FORMATS, 
+  provideNativeDateAdapter
+} from '@angular/material/core';
 
 export const MY_DATE_FORMATS = {
   parse: {
@@ -25,6 +30,8 @@ export const MY_DATE_FORMATS = {
   selector: 'app-edit-user-form',
   standalone: true,
   providers: [
+    { provide: MAT_DATE_LOCALE, useValue: 'es-ES' }, 
+    provideNativeDateAdapter(), 
     { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS }
   ],
   templateUrl: './edit-user-form.component.html',
