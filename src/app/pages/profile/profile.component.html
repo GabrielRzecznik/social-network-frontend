@@ -1,35 +1,39 @@
-<div class="container glass-card" *ngIf="userProfile$ | async as user">
-    <div class="avatar-wrapper">
-        <div class="user-avatar">
-            <img [src]="userAvatarUrl || 'assets/avatar-placeholder.png'" alt="Avatar usuario" />
+<div class="container">
+    <div class="card-container glass-card" *ngIf="userProfile$ | async as user">
+        <div class="avatar-wrapper">
+            <div class="user-avatar">
+                <img [src]="userAvatarUrl || 'assets/avatar-placeholder.png'" alt="Avatar usuario" />
+            </div>
+            <span class="edit-overlay btn btn-warning">
+                <i class="bi bi-pencil"></i>
+            </span>
         </div>
-        <span class="edit-overlay btn btn-warning">
-            <i class="bi bi-pencil"></i>
-        </span>
-    </div>
-
-    <div class="user-info">
-        <div class="user-header">
-            <b class="fullName">{{ user.name }} {{ user.surname }}</b>
-
-            <button 
-                mat-raised-button
-                color="accent"
-                class="btn-user-edit glass-card"
-                (click)="openEditUserDialog()">
-                <i class="bi bi-person-fill-gear"></i> Editar perfil
-            </button>
-
-        </div>
-
-        <span class="userName">{{ user.username }}</span>
-
-        <div class="row text-center pss">
-            <div class="col-4"><b>32</b><br>publicaciones</div>
-            <div class="col-4"><b>18</b><br>seguidores</div>
-            <div class="col-4"><b>321</b><br>seguidos</div>
+    
+        <div class="user-info">
+            <div class="user-header">
+                <b class="fullName">{{ user.name }} {{ user.surname }}</b>
+    
+                <button 
+                    mat-raised-button
+                    color="accent"
+                    class="glass-card btn-user-edit"
+                    (click)="openEditUserDialog()">
+                    <i class="bi bi-person-fill-gear"></i> Editar perfil
+                </button>
+    
+            </div>
+    
+            <span class="userName">{{ user.username }}</span>
+    
+            <div class="row text-center pss">
+                <div class="col-4"><b>32</b><br>publicaciones</div>
+                <div class="col-4"><b>18</b><br>seguidores</div>
+                <div class="col-4"><b>321</b><br>seguidos</div>
+            </div>
         </div>
     </div>
 </div>
 
 <app-posts></app-posts>
+
+

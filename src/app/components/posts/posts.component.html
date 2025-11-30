@@ -1,43 +1,61 @@
 <div class="container">
-  <div class="text-end mb-3 publicationSize">
-    <div class="btn-group" role="group" aria-label="First group">
-      <span class="btn btn-sm btn-dark" style="pointer-events: none;">
+  <div class="post-row mb-3">
+    <div class="user-avatar">
+      <img [src]="userAvatarUrl || 'assets/avatar-placeholder.png'" alt="Avatar usuario" />
+    </div>
+
+    <div class="glass-card to-post w-100">
+      <span class="">¿Qué querés publicar?</span>
+      <i class="bi bi-pencil-square me-2"></i>
+    </div>
+
+    <div class="glass-card btn-post-action">
+      <i class="bi bi-image"></i> Foto
+    </div>
+
+    
+    <div class="glass-card btn-group groupSizePost">
+      <span class="me-2">
         Tamaño de publicaciones 
       </span>
-      <button type="button" class="btn btn-sm btn-outline-dark" (click)="decreaseSize()">
+      <div type="button" class="me-2" (click)="decreaseSize()">
         <i class="bi bi-plus-lg"></i>
-      </button>
-      <button type="button" class="btn btn-sm btn-outline-dark" (click)="increaseSize()">
+      </div>
+      <div type="button" (click)="increaseSize()">
         <i class="bi bi-dash-lg"></i>
-      </button>
+      </div>
     </div>
+  
   </div>
-    <div class="row">
-      @for (post of posts; track post.id_post) {
-        <div class="mb-3" [ngClass]="'col-md-' + colSize">
-          <div class="card h-100">
-            <div class="card-body">
-              <p class="card-text">{{ post.content }}</p>
-            </div>
-            <div class="card-footer date">
-              <div class="row">
-                <div class="col-6">
-                  <small class="text-body-secondary">
-                    {{ post.timestamp | FullDateTime }}
-                  </small>
-                </div>
-                <div class="col-6 text-end">
-                  <button type="button" class="btn btn-sm me-1">
-                    <i class="bi bi-heart"></i>
-                  </button>
-                  <button type="button" class="btn btn-sm">
-                    <i class="bi bi-chat"></i>
-                  </button>
-                </div>
+ 
+  <hr>
+  
+  <div class="row">
+    @for (post of posts; track post.id_post) {
+      <div class="mb-3" [ngClass]="'col-md-' + colSize">
+        <div class="card glass-card h-100">
+          <div class="card-body">
+            <p class="card-text">{{ post.content }}</p>
+          </div>
+          <div class="card-footer date">
+            <div class="row">
+              <div class="col-6">
+                <small class="text-body-secondary">
+                  {{ post.timestamp | FullDateTime }}
+                </small>
+              </div>
+              <div class="col-6 text-end">
+                <button type="button" class="btn btn-sm me-1">
+                  <i class="bi bi-heart"></i>
+                </button>
+                <button type="button" class="btn btn-sm">
+                  <i class="bi bi-chat"></i>
+                </button>
               </div>
             </div>
           </div>
         </div>
-      }
-    </div>
+      </div>
+    }
+  </div>
 </div>

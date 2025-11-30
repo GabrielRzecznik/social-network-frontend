@@ -1,4 +1,4 @@
-.container {
+.card-container {
   margin-top: 25px;
   display: flex;
   align-items: center;
@@ -8,11 +8,10 @@
   height: 197px;
   
   @media (max-width: 800px) {
-    width: 95%;
     height: auto;
-    margin-top: 70px;
-    margin-bottom: 25px;
-    padding-bottom: 30px;
+    margin-top: 85px;
+    margin-bottom: 35px;
+    padding-bottom: 38px;
     flex-direction: column;
     text-align: center;
   }
