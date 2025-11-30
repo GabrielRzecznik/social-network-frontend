@@ -1,6 +1,92 @@
-/* You can add global styles to this file, and also import other style files */
 @import "bootstrap-icons/font/bootstrap-icons.css";
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body { height: 100%; margin: 0; }
 
+body {
+    background-color: #000;
+    background-image:
+        radial-gradient(circle, rgba(17, 0, 255, 0.2) 0.2%, transparent 30%),  /* foco 1 */
+        radial-gradient(circle, rgba(0, 174, 255, 0.2) 0.2%, transparent 35%), /* foco 2 */
+        radial-gradient(circle, rgba(140, 0, 255, 0.2) 0.2%, transparent 45%); /* foco 3 */
+
+    background-size: 
+        80% 60%, 
+        55% 55%, 
+        50% 50%;
+
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+    animation: blobsMove 150s ease-in-out infinite alternate;
+}
+
+@keyframes blobsMove {
+    0% {
+        background-position:
+            -10% 10%,     
+            95% 80%,      
+            20% 110%;    
+    }
+
+    25% {
+        background-position:
+            30% 120%,    
+            120% 0%,     
+            -15% 50%;    
+    }
+
+    50% {
+        background-position:
+            50% 50%, 
+            100% 120%,   
+            80% -10%;     
+    }
+
+    75% {
+        background-position:
+            -20% 80%,     
+            50% -15%,     
+            120% 40%;     
+    }
+
+    100% {
+        background-position:
+            110% 30%,     
+            -10% 70%,      
+            60% 120%;     
+    }
+}
+
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  color: #fff;
+  border-radius: 15px;
+  padding: 20px;
+  overflow: visible;
+}
+
+.glass-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+
+  padding: 1px;
+
+  background:
+    linear-gradient(120deg, rgba(255, 255, 255, 0.192), transparent 70%) border-box,
+    radial-gradient(circle at 10% 20%, rgba(255,255,255,0.6), transparent 3%) border-box,
+    radial-gradient(circle at 80% 30%, rgba(255,255,255,0.3), transparent 0%) border-box,
+    radial-gradient(circle at 40% 80%, rgba(255,255,255,0.5), transparent 5%) border-box,
+    linear-gradient(to right, rgba(255,255,255,0.1), rgba(255,255,255,0.1)) border-box;
+
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0) border-box;
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}

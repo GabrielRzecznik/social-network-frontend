@@ -1,4 +1,4 @@
-<div class="container" *ngIf="userProfile$ | async as user">
+<div class="container glass-card" *ngIf="userProfile$ | async as user">
     <div class="avatar-wrapper">
         <div class="user-avatar">
             <img [src]="userAvatarUrl || 'assets/avatar-placeholder.png'" alt="Avatar usuario" />
@@ -15,7 +15,7 @@
             <button 
                 mat-raised-button
                 color="accent"
-                class="btn-user-edit"
+                class="btn-user-edit glass-card"
                 (click)="openEditUserDialog()">
                 <i class="bi bi-person-fill-gear"></i> Editar perfil
             </button>
