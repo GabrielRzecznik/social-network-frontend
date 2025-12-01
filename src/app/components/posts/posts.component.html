@@ -5,7 +5,7 @@
     </div>
 
     <div class="glass-card to-post w-100">
-      <span class="">¿Qué querés publicar?</span>
+      <span class="">¿Qué querés postear?</span>
       <i class="bi bi-pencil-square me-2"></i>
     </div>
 
@@ -16,13 +16,13 @@
     
     <div class="glass-card btn-group groupSizePost">
       <span class="me-2">
-        Tamaño de publicaciones 
+        Tamaño de posts 
       </span>
-      <div type="button" class="me-2" (click)="decreaseSize()">
-        <i class="bi bi-plus-lg"></i>
-      </div>
-      <div type="button" (click)="increaseSize()">
+      <div type="button" class="me-2" (click)="increaseSize()">
         <i class="bi bi-dash-lg"></i>
+      </div>
+      <div type="button" (click)="decreaseSize()">
+        <i class="bi bi-plus-lg"></i>
       </div>
     </div>
   
@@ -35,20 +35,57 @@
       <div class="mb-3" [ngClass]="'col-md-' + colSize">
         <div class="card glass-card h-100">
           <div class="card-body">
+
+            <div class="post-row mb-3">
+              <div class="user-avatar">
+                <img [src]="userAvatarUrl || 'assets/avatar-placeholder.png'" alt="Avatar usuario" />
+              </div>
+              
+              <span>{{ post.username }}</span>
+              
+              <div class="ms-auto">
+                <button mat-icon-button class="btn-more_vert" [matMenuTriggerFor]="menu">
+                  <mat-icon>more_vert</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu" class="small-menu glass-card">
+                  <!-- Editar -->
+                  <button mat-menu-item>
+                    <mat-icon>edit</mat-icon>
+                    <span>Editar post</span>
+                  </button>
+
+                  <!-- Ocultar -->
+                  <button mat-menu-item>
+                    <mat-icon>visibility_off</mat-icon>
+                    <span>Ocultar post</span>
+                  </button>
+
+                  <mat-divider></mat-divider>
+
+                  <!-- Eliminar -->
+                  <button mat-menu-item class="delete-item">
+                    <mat-icon color="warn">delete</mat-icon>
+                    <span>Eliminar post</span>
+                  </button>
+                </mat-menu>
+
+              </div>
+            </div>
+
             <p class="card-text">{{ post.content }}</p>
           </div>
           <div class="card-footer date">
             <div class="row">
               <div class="col-6">
-                <small class="text-body-secondary">
+                <small>
                   {{ post.timestamp | FullDateTime }}
                 </small>
               </div>
               <div class="col-6 text-end">
-                <button type="button" class="btn btn-sm me-1">
+                <button type="button" class="btn btn-sm me-1 btn-post-like">
                   <i class="bi bi-heart"></i>
                 </button>
-                <button type="button" class="btn btn-sm">
+                <button type="button" class="btn btn-sm btn-post-comment">
                   <i class="bi bi-chat"></i>
                 </button>
               </div>

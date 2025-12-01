@@ -74,3 +74,21 @@
         display: none;
     }
 }
+
+.btn-post-like{
+  color: rgb(136, 136, 136);
+
+  &:hover {
+    color: rgb(182, 20, 20);
+    background: rgba(190, 70, 70, 0.103);
+  }
+}
+
+.btn-post-comment{
+  color: rgb(136, 136, 136);
+
+  &:hover {
+    color: rgb(47, 117, 247);
+    background: rgba(0, 110, 255, 0.103);
+  }
+}

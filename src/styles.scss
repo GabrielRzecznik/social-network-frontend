@@ -1,3 +1,4 @@
+@import '@angular/material/prebuilt-themes/pink-bluegrey.css';
 @import "bootstrap-icons/font/bootstrap-icons.css";
 
 html, body { height: 100%; margin: 0; }
@@ -76,12 +77,125 @@ body {
 
   padding: 1px;
 
+    background:
+    radial-gradient(circle at 80% 20%, rgba(255,255,255,0.9), transparent 40%) border-box,
+    radial-gradient(circle at 20% 80%, rgba(255,255,255,0.6), transparent 45%) border-box,
+    linear-gradient(
+      120deg,
+      rgba(255, 255, 255, 0.25),
+      transparent 70%
+    ) border-box;
+
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0) border-box;
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+.btn-more_vert{
+    width: 35px !important;
+    height: 35px !important;
+    padding: 0 !important;
+}
+
+/* Panel del menú Material */
+.cdk-overlay-pane .mat-mdc-menu-panel {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  color: #fff;
+  border-radius: 10px;
+  overflow: visible;
+}
+
+.cdk-overlay-pane .mat-mdc-menu-item {
+  min-height: 34px !important;
+  padding: 4px 14px !important;
+  font-size: 14px !important;
+}
+
+.cdk-overlay-pane .mat-mdc-menu-item mat-icon {
+  font-size: 20px !important;
+  width: 20px !important;
+  height: 20px !important;
+}
+
+.cdk-overlay-pane .mat-mdc-dialog-surface {
+  background: rgba(255, 255, 255, 0.05) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(5px) !important;
+  color: #fff !important;
+  border-radius: 10px !important;
+  overflow: visible !important;
+}
+
+.cdk-overlay-pane .mat-mdc-dialog-surface {
+  position: relative;
+  background: rgba(255, 255, 255, 0.05) !important;
+  backdrop-filter: blur(5px) !important;
+  -webkit-backdrop-filter: blur(5px) !important;
+  border-radius: 10px !important;
+  overflow: hidden !important;
+  color: #fff !important;
+}
+
+/* Borde brillante */
+.cdk-overlay-pane .mat-mdc-dialog-surface::before {
   background:
-    linear-gradient(120deg, rgba(255, 255, 255, 0.192), transparent 70%) border-box,
-    radial-gradient(circle at 10% 20%, rgba(255,255,255,0.6), transparent 3%) border-box,
-    radial-gradient(circle at 80% 30%, rgba(255,255,255,0.3), transparent 0%) border-box,
-    radial-gradient(circle at 40% 80%, rgba(255,255,255,0.5), transparent 5%) border-box,
-    linear-gradient(to right, rgba(255,255,255,0.1), rgba(255,255,255,0.1)) border-box;
+    radial-gradient(circle at 80% 20%, rgba(255,255,255,0.9), transparent 40%) border-box,
+    radial-gradient(circle at 20% 80%, rgba(255,255,255,0.6), transparent 45%) border-box,
+    linear-gradient(
+      120deg,
+      rgba(255, 255, 255, 0.25),
+      transparent 70%
+    ) border-box;
+
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0) border-box;
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+/* Cambiar el color del borde cuando el input está enfocado 
+.mat-mdc-form-field.mat-focused .mdc-notched-outline__leading,
+.mat-mdc-form-field.mat-focused .mdc-notched-outline__notch,
+.mat-mdc-form-field.mat-focused .mdc-notched-outline__trailing {
+  border-color: #ffffff !important;
+}
+
+.mat-mdc-form-field.mat-focused .mdc-floating-label {
+  color: #ffffff !important; 
+}*/
+
+.cdk-overlay-pane .mat-datepicker-content {
+  background: rgba(255, 255, 255, 0.05) !important;
+  backdrop-filter: blur(5px) !important;
+  -webkit-backdrop-filter: blur(5px) !important;
+  color: #fff !important;
+  border-radius: 12px !important;
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.15) inset !important;
+  overflow: hidden !important;
+}
+
+.cdk-overlay-pane .mat-datepicker-content::before {
+content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+
+  padding: 1px;
+
+    background:
+    radial-gradient(circle at 80% 20%, rgba(255,255,255,0.9), transparent 40%) border-box,
+    radial-gradient(circle at 20% 80%, rgba(255,255,255,0.6), transparent 45%) border-box,
+    linear-gradient(
+      120deg,
+      rgba(255, 255, 255, 0.25),
+      transparent 70%
+    ) border-box;
 
   -webkit-mask:
     linear-gradient(#000 0 0) content-box,
